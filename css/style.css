@@ -194,6 +194,7 @@ a {
   background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
   position: relative;
   overflow: hidden;
+  padding-top: 80px; /* ヘッダーの高さ分のスペースを確保 */
 }
 
 .hero-container {
