@@ -1751,7 +1751,7 @@ a {
 }
 
 .explanation-list li::before {
-  content: '▶';
+  content: "▶";
   position: absolute;
   left: 0;
   color: #ff0000;
@@ -1768,16 +1768,16 @@ a {
     padding: 1rem;
     margin: 2rem 0;
   }
-  
+
   .explanation-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .explanation-item {
     padding: 1.5rem;
   }
-  
+
   .explanation-title {
     font-size: 1.1rem;
   }
@@ -1792,13 +1792,14 @@ a {
 }
 
 .featured-project::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="grad" cx="50%" cy="50%"><stop offset="0%" style="stop-color:%23ff0000;stop-opacity:0.05"/><stop offset="100%" style="stop-color:%23ff0000;stop-opacity:0"/></radialGradient></defs><circle cx="200" cy="200" r="150" fill="url(%23grad)"/><circle cx="800" cy="800" r="200" fill="url(%23grad)"/></svg>') no-repeat;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="grad" cx="50%" cy="50%"><stop offset="0%" style="stop-color:%23ff0000;stop-opacity:0.05"/><stop offset="100%" style="stop-color:%23ff0000;stop-opacity:0"/></radialGradient></defs><circle cx="200" cy="200" r="150" fill="url(%23grad)"/><circle cx="800" cy="800" r="200" fill="url(%23grad)"/></svg>')
+    no-repeat;
   background-size: cover;
   z-index: 1;
 }
@@ -2090,7 +2091,11 @@ a {
 }
 
 .project-impact {
-  background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 0, 0.1),
+    rgba(255, 0, 0, 0.05)
+  );
   padding: 3rem;
   border-radius: 12px;
   border: 1px solid #ff0000;
@@ -2137,15 +2142,15 @@ a {
     gap: 3rem;
     text-align: center;
   }
-  
+
   .project-title {
     font-size: 2.5rem;
   }
-  
+
   .details-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .tech-grid {
     grid-template-columns: 1fr;
   }
@@ -2155,21 +2160,21 @@ a {
   .project-title {
     font-size: 2rem;
   }
-  
+
   .project-stats {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .phone-frame {
     width: 250px;
     height: 500px;
   }
-  
+
   .features-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .impact-grid {
     grid-template-columns: 1fr;
   }
@@ -2309,12 +2314,12 @@ a {
 }
 
 .download-button.primary {
-  background: linear-gradient(135deg, #007AFF, #0051D5);
-  border-color: #007AFF;
+  background: linear-gradient(135deg, #007aff, #0051d5);
+  border-color: #007aff;
 }
 
 .download-button.primary:hover {
-  border-color: #007AFF;
+  border-color: #007aff;
   box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3);
 }
 
@@ -2390,7 +2395,7 @@ a {
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   .screenshot-container .phone-frame {
     width: 200px;
     height: 400px;
