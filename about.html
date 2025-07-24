@@ -135,21 +135,20 @@
         </p>
         <div class="business-model-diagram">
           <div class="mermaid" id="business-model-chart">
-            graph TD
-              Client[企業<br/>クライアント<br/><small>低コストでアイデアを具現化</small>]
-              Valiark[VALIARK<br/><small>ビジネスとマネジメント能力の習得</small>]
-              Student[阪大生エンジニア<br/><small>実務を通じて技術力を向上</small>]
-              
-              Client -->|アイデアと開発案件の依頼| Valiark
-              Valiark -->|安価で高品質なソリューション| Client
-              Valiark -->|実践的な開発案件と報酬| Student
-              Student -->|高い技術力と労働力| Valiark
-              
-              classDef valiarkStyle fill:#FF0000,stroke:#333333,stroke-width:3px,color:#FFFFFF,font-weight:bold
-              classDef defaultStyle fill:#FFFFFF,stroke:#333333,stroke-width:2px,color:#333333
-              
-              class Valiark valiarkStyle
-              class Client,Student defaultStyle
+            graph TD Client[企業<br />クライアント<br /><small
+              >低コストでアイデアを具現化</small
+            >] Valiark[VALIARK<br /><small
+              >ビジネスとマネジメント能力の習得</small
+            >] Student[阪大生エンジニア<br /><small
+              >実務を通じて技術力を向上</small
+            >] Client -->|アイデアと開発案件の依頼| Valiark Valiark
+            -->|安価で高品質なソリューション| Client Valiark
+            -->|実践的な開発案件と報酬| Student Student -->|高い技術力と労働力|
+            Valiark classDef valiarkStyle
+            fill:#FF0000,stroke:#333333,stroke-width:3px,color:#FFFFFF,font-weight:bold
+            classDef defaultStyle
+            fill:#FFFFFF,stroke:#333333,stroke-width:2px,color:#333333 class
+            Valiark valiarkStyle class Client,Student defaultStyle
           </div>
         </div>
         <div class="business-model-explanation">
