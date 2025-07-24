@@ -13,42 +13,8 @@
     />
   </head>
   <body>
-    <!-- Header -->
-    <header class="header">
-      <nav class="nav">
-        <div class="nav-container">
-          <div class="nav-logo">
-            <img
-              src="images/logo.png"
-              alt="VALIARK - 次世代の知性が、ビジネスを加速させる"
-              class="logo"
-            />
-          </div>
-          <ul class="nav-menu">
-            <li class="nav-item">
-              <a href="index.html" class="nav-link">ホーム</a>
-            </li>
-            <li class="nav-item">
-              <a href="about.html" class="nav-link active">私たちについて</a>
-            </li>
-            <li class="nav-item">
-              <a href="services.html" class="nav-link">事業内容</a>
-            </li>
-            <li class="nav-item">
-              <a href="works.html" class="nav-link">実績紹介</a>
-            </li>
-            <li class="nav-item">
-              <a href="contact.html" class="nav-link">お問い合わせ</a>
-            </li>
-          </ul>
-          <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </div>
-        </div>
-      </nav>
-    </header>
+    <!-- Common Header Container -->
+    <div id="header-container"></div>
 
     <!-- Page Header -->
     <section class="page-header">
@@ -113,6 +79,52 @@
       </div>
     </section>
 
+    <!-- Our Story Section -->
+    <section class="our-story section bg-light">
+      <div class="container">
+        <h2 class="section-title">なぜ、私たちは「方舟」を創ったのか</h2>
+        <div class="story-content">
+          <div class="story-text">
+            <p class="story-paragraph">
+              果てしなく感じた受験勉強。<br />
+              その長いトンネルを抜けた先に、どんな未来が待っているのか。<br />
+              かつての私たちは、漠然とした不安の中にいました。
+            </p>
+            <p class="story-paragraph">
+              決められたレールの上を走るだけが、人生なのだろうか。私たちの世界は、まるで色のない教科書のようでした。
+            </p>
+            <p class="story-paragraph highlight">
+              しかし、大学でプログラミングに出会った瞬間、世界は一変します。
+            </p>
+            <p class="story-paragraph">
+              たった4ヶ月。<br />
+              無我夢中でコードを書き、アイデアを形にする中で、私たちは気づきました。
+            </p>
+            <p class="story-quote">「大学生は、何にだってなれる」</p>
+            <p class="story-paragraph">
+              もう我慢なんて必要ない。自分の「好き」を、情熱を、今この瞬間にこそ突き詰めるべきなんだ、と。<br />
+              勉強だけが全てだったモノクロの人生が、鮮やかな色を取り戻し、創造（クリエイティブ）の喜びに震えた瞬間でした。
+            </p>
+            <p class="story-paragraph">
+              そして周りを見渡せば、同じように燻っている「努力の天才」たちがいました。<br />
+              磨かれるのを待っているだけの、才能の「原石」たちです。
+            </p>
+            <p class="story-paragraph">
+              この才能を、1秒でも早く社会へ。実践という光で磨き上げたい。<br />
+              その想いが、私たちを突き動かしました。
+            </p>
+            <p class="story-paragraph highlight">
+              私たちの方舟<strong>「VALIARK」</strong>は、そんな才能の原石たちを乗せるために生まれました。
+            </p>
+            <p class="story-paragraph">
+              私たちの持つ情熱とバイタリティ（Validity/Vitality）でこの船の舵を切り、社会に本質的な価値（Value）を届ける。
+            </p>
+            <p class="story-conclusion">それが、私たちの航海です。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Founders Section -->
     <section class="founders-section section">
       <div class="container">
@@ -121,16 +133,17 @@
           <div class="founder-card">
             <div class="founder-image">
               <img
-                src="images/founder1.jpg"
-                alt="創設者1"
+                src="./images/maki.png"
+                alt="牧夢斗"
                 class="founder-photo"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#fff;font-size:14px;\'>画像読み込み中...</div>'"
               />
             </div>
             <div class="founder-info">
-              <h3 class="founder-name">創設者 A</h3>
-              <p class="founder-title">代表・技術責任者</p>
+              <h3 class="founder-name">牧 夢斗（まき ゆめと）</h3>
+              <p class="founder-title">共同代表・技術責任者</p>
               <p class="founder-description">
-                大阪大学工学部情報工学科在籍。機械学習とデータサイエンスを専攻し、複数の学会で研究発表を行っている。プログラミング歴8年、特にPythonとAI技術に精通。「技術で社会を変える」をモットーに、VALIARKを創設。
+                18歳、大分県出身。大阪大学基礎工学部情報科学科1年生。機械学習とデータサイエンスを専攻し、AIソリューション開発に情熱を注ぐ。「技術で社会を変える」をモットーに、VALIARKを共同創設。
               </p>
               <div class="founder-skills">
                 <span class="skill-tag">Python</span>
@@ -143,16 +156,17 @@
           <div class="founder-card">
             <div class="founder-image">
               <img
-                src="images/founder2.jpg"
-                alt="創設者2"
+                src="./images/kawamura.png"
+                alt="河村孝太郎"
                 class="founder-photo"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#fff;font-size:14px;\'>画像読み込み中...</div>'"
               />
             </div>
             <div class="founder-info">
-              <h3 class="founder-name">創設者 B</h3>
-              <p class="founder-title">共同創設者・事業開発責任者</p>
+              <h3 class="founder-name">河村 孝太郎（かわむら こうたろう）</h3>
+              <p class="founder-title">共同代表・事業開発責任者</p>
               <p class="founder-description">
-                大阪大学経済学部在籍。ビジネス戦略とプロジェクトマネジメントを専門とし、複数のスタートアップでインターンシップを経験。技術と経営の架け橋となることを目指し、VALIARKの事業展開を担当。
+                19歳、三重県出身。大阪大学基礎工学部情報科学科1年生。ビジネス戦略とプロジェクトマネジメントを専門とし、技術と経営の架け橋となることを目指している。VALIARKの事業展開を担当する共同代表。
               </p>
               <div class="founder-skills">
                 <span class="skill-tag">Business Strategy</span>
@@ -313,6 +327,7 @@
       </div>
     </footer>
 
+    <script src="js/header.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>

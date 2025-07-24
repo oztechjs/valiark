@@ -114,11 +114,11 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(20, 20, 20, 0.95);
+  background-color: rgba(20, 20, 20, 0.95) !important;
   backdrop-filter: blur(10px);
   z-index: 1000;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 20px rgba(255, 255, 255, 0.1) !important;
   border-bottom: 1px solid #333333;
 }
 
@@ -145,14 +145,14 @@ a {
 .nav-link {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
-  color: #e0e0e0;
+  color: #ffffff !important;
   transition: color 0.3s ease;
   position: relative;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: #ff0000;
+  color: #ff0000 !important;
 }
 
 .nav-link::after {
@@ -180,7 +180,7 @@ a {
 .bar {
   width: 25px;
   height: 3px;
-  background-color: #e0e0e0;
+  background-color: #ffffff !important;
   margin: 3px 0;
   transition: 0.3s;
 }
@@ -521,14 +521,19 @@ a {
 }
 
 .founder-image {
-  height: 300px;
+  width: 200px;
+  height: 250px;
+  border-radius: 12px;
   overflow: hidden;
+  background-color: #333; /* Debug: fallback background */
+  border: 2px solid #ff0000; /* Debug: red border to see container */
 }
 
 .founder-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block; /* Ensure image displays as block */
 }
 
 .founder-info {
@@ -1515,5 +1520,147 @@ a {
 
   .hero-logo-img {
     max-height: 200px;
+  }
+}
+
+/* === OUR STORY SECTION === */
+.our-story {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.our-story::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="grad" cx="50%" cy="50%"><stop offset="0%" style="stop-color:%23ff0000;stop-opacity:0.1"/><stop offset="100%" style="stop-color:%23ff0000;stop-opacity:0"/></radialGradient></defs><circle cx="200" cy="200" r="150" fill="url(%23grad)"/><circle cx="800" cy="300" r="100" fill="url(%23grad)"/><circle cx="600" cy="700" r="120" fill="url(%23grad)"/></svg>')
+    no-repeat;
+  background-size: cover;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.our-story .container {
+  position: relative;
+  z-index: 2;
+}
+
+.story-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.story-text {
+  line-height: 2;
+  font-size: 1.1rem;
+}
+
+.story-paragraph {
+  margin-bottom: 2rem;
+  color: #e0e0e0;
+  font-weight: 400;
+}
+
+.story-paragraph.highlight {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.2rem;
+  position: relative;
+  padding: 1.5rem 0;
+}
+
+.story-paragraph.highlight::before,
+.story-paragraph.highlight::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff0000, transparent);
+}
+
+.story-paragraph.highlight::before {
+  top: 0;
+}
+
+.story-paragraph.highlight::after {
+  bottom: 0;
+}
+
+.story-quote {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ff0000;
+  margin: 3rem 0;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  text-align: center;
+}
+
+.story-quote::before,
+.story-quote::after {
+  content: '"';
+  font-size: 3rem;
+  color: #ff0000;
+  opacity: 0.5;
+  position: absolute;
+  font-family: "Times New Roman", serif;
+}
+
+.story-quote::before {
+  left: -1.5rem;
+  top: -0.5rem;
+}
+
+.story-quote::after {
+  right: -1.5rem;
+  bottom: -1rem;
+}
+
+.story-conclusion {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 3rem;
+  padding: 2rem;
+  border: 2px solid #ff0000;
+  border-radius: 12px;
+  background: rgba(255, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* Responsive Design for Story Section */
+@media (max-width: 768px) {
+  .story-text {
+    font-size: 1rem;
+  }
+
+  .story-quote {
+    font-size: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .story-quote::before,
+  .story-quote::after {
+    font-size: 2rem;
+  }
+
+  .story-quote::before {
+    left: -1rem;
+  }
+
+  .story-quote::after {
+    right: -1rem;
+  }
+
+  .story-conclusion {
+    font-size: 1.1rem;
+    padding: 1.5rem;
   }
 }

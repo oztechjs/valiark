@@ -39,21 +39,10 @@ function initMobileMenu() {
   }
 }
 
-// === HEADER SCROLL EFFECT ===
+// === HEADER SCROLL EFFECT === (Disabled - using common header)
 function initHeaderScrollEffect() {
-  const header = document.querySelector(".header");
-
-  if (header) {
-    window.addEventListener("scroll", function () {
-      if (window.scrollY > 100) {
-        header.style.backgroundColor = "rgba(255, 255, 255, 0.98)";
-        header.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.15)";
-      } else {
-        header.style.backgroundColor = "rgba(255, 255, 255, 0.95)";
-        header.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
-      }
-    });
-  }
+  // This function is now handled in header.js
+  // Keeping for compatibility but not using
 }
 
 // === SMOOTH SCROLLING ===
