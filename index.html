@@ -12,35 +12,28 @@
       rel="stylesheet"
     />
   </head>
-  <body>
-    <!-- Common Header Container -->
-    <div id="header-container"></div>
+  <body class="home">
+    <!-- Header is injected by js/header.js -->
 
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-container">
-        <div class="hero-content">
-          <h1 class="hero-title">
-            次世代の知性が、<br />ビジネスを加速させる。
-          </h1>
-          <p class="hero-subtitle">
-            大阪大学の学生による、AIソリューションチーム「VALIARK」
-          </p>
-          <div class="hero-buttons">
-            <a href="services.html" class="btn btn-primary">事業内容を見る</a>
-            <a href="contact.html" class="btn btn-secondary">お問い合わせ</a>
-          </div>
+    <!-- Results Strip (blended portfolio stats) -->
+    <section class="results-strip">
+      <div class="container results-container">
+        <div class="result-item">
+          <div class="result-number">¥2.5M</div>
+          <div class="result-label">受託規模（PedalShare）</div>
         </div>
-        <div class="hero-logo">
-          <img
-            src="images/IMG_2702.JPG"
-            alt="VALIARK - AIソリューションチーム"
-            class="hero-logo-img"
-          />
+        <div class="result-item">
+          <div class="result-number">★5</div>
+          <div class="result-label">App Store評価（履修伝説）</div>
         </div>
-      </div>
-      <div class="scroll-indicator">
-        <div class="scroll-arrow"></div>
+        <div class="result-item">
+          <div class="result-number">2ヶ月</div>
+          <div class="result-label">初リリースまで</div>
+        </div>
+        <div class="result-item">
+          <div class="result-number">Expo 2025</div>
+          <div class="result-label">musuhi 出展</div>
+        </div>
       </div>
     </section>
 
@@ -292,6 +285,120 @@
               >参加希望の方はこちら</a
             >
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section portfolio-section">
+      <div class="container">
+        <h2 class="section-title">Portfolio</h2>
+        <p class="section-text">
+          VALIARKの受託開発・自社プロダクトの主要実績です。
+        </p>
+
+        <div class="portfolio-grid">
+          <!-- PedalShare -->
+          <article class="portfolio-card">
+            <div class="portfolio-card-header">
+              <div class="portfolio-badges">
+                <span class="badge badge-contract">受託</span>
+                <span class="badge">モバイルアプリ</span>
+              </div>
+              <h3 class="portfolio-title">PedalShare（京都・NPO法人）</h3>
+              <p class="portfolio-desc">
+                250万円規模のアプリ開発を受託。徳島県知事から高評価。2026年3月末納品予定。
+              </p>
+            </div>
+            <div class="portfolio-meta">
+              <span>期間: 進行中（〜2026/03）</span>
+            </div>
+          </article>
+
+          <!-- Sportstech -->
+          <article class="portfolio-card">
+            <div class="portfolio-card-header">
+              <div class="portfolio-badges">
+                <span class="badge badge-contract">受託</span>
+                <span class="badge">技術サポート</span>
+              </div>
+              <h3 class="portfolio-title">Sportstech（東京）</h3>
+              <p class="portfolio-desc">継続的なアプリ技術サポートを提供。</p>
+            </div>
+            <div class="portfolio-meta">
+              <span>期間: 2025/09〜 継続</span>
+            </div>
+          </article>
+
+          <!-- 履修伝説 -->
+          <article class="portfolio-card highlight">
+            <div class="portfolio-thumb">
+              <img src="images/IMG_1424.PNG" alt="履修伝説アプリアイコン" />
+            </div>
+            <div class="portfolio-card-header">
+              <div class="portfolio-badges">
+                <span class="badge badge-product">自社</span>
+                <span class="badge">iOS</span>
+              </div>
+              <h3 class="portfolio-title">履修伝説</h3>
+              <p class="portfolio-desc">
+                大学生向けの履修・課題管理アプリ。学習開始から2ヶ月でリリース、App
+                Storeで★5評価。
+              </p>
+            </div>
+            <div class="portfolio-actions">
+              <a class="btn btn-secondary" href="works.html">詳細を見る</a>
+              <a
+                class="btn btn-primary"
+                target="_blank"
+                rel="noopener"
+                href="https://apps.apple.com/jp/app/%E5%B1%A5%E4%BF%AE%E4%BC%9D%E8%AA%AC-ver1-0/id6747418309?l=en-US"
+                >App Store</a
+              >
+            </div>
+          </article>
+
+          <!-- musuhi -->
+          <article class="portfolio-card">
+            <div class="portfolio-thumb">
+              <img
+                src="images/S__7749648.jpg"
+                alt="Expo 2025 出展ブースの様子（musuhi）"
+              />
+            </div>
+            <div class="portfolio-card-header">
+              <div class="portfolio-badges">
+                <span class="badge badge-product">自社</span>
+                <span class="badge">Expo 2025</span>
+              </div>
+              <h3 class="portfolio-title">musuhi</h3>
+              <p class="portfolio-desc">大阪万博2025に出展したアプリ。</p>
+            </div>
+            <div class="portfolio-meta">
+              <span>ステータス: 出展済</span>
+            </div>
+          </article>
+
+          <!-- AIチャットサービス -->
+          <article class="portfolio-card">
+            <div class="portfolio-card-header">
+              <div class="portfolio-badges">
+                <span class="badge badge-rnd">R&amp;D</span>
+                <span class="badge">AIサービス</span>
+              </div>
+              <h3 class="portfolio-title">AIチャットサービス</h3>
+              <p class="portfolio-desc">
+                恋愛・受験に特化したAIシステムを開発中。BtoB向けPoCを想定。
+              </p>
+            </div>
+            <div class="portfolio-meta">
+              <span>ステータス: 開発中</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="section-cta">
+          <a href="works.html" class="btn btn-primary">実績をもっと見る</a>
         </div>
       </div>
     </section>
