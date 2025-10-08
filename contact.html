@@ -699,5 +699,48 @@
         });
       })();
     </script>
+    <script>
+      // デバッグ用: フォーム UI を触らずに AJAX 経由でテスト送信する関数
+      // コンソールで window.testContactSubmission() を呼び出してください。
+      window.testContactSubmission = async function () {
+        const form = document.getElementById('contactForm');
+        if (!form) { console.warn('form not found'); return; }
+        if (!form.action || !form.action.includes('formsubmit.co/')) { console.warn('action not ready yet:', form.action); return; }
+        const emailPart = form.action.split('formsubmit.co/')[1];
+        const url = `https://formsubmit.co/ajax/${emailPart}`;
+        const now = new Date();
+        const stamp = now.toISOString();
+        const fd = new FormData();
+        // 必須フィールド最低限
+        fd.append('inquiryType', 'business');
+        fd.append('lastName', 'Test');
+        fd.append('firstName', 'Auto');
+        // 送信元メール（受信確認しやすいように）
+        fd.append('email', 'test+' + Date.now() + '@example.com');
+        fd.append('subject', 'デバッグ送信 ' + stamp);
+        fd.append('message', '自動デバッグ送信: ' + stamp + '\nThis is a test payload.');
+        fd.append('privacy', 'on');
+        // 既存 hidden 相当
+        fd.append('_subject', '【VALIARKサイト】デバッグ送信');
+        fd.append('_captcha', 'false');
+        fd.append('_honey', '');
+        // _next は AJAX では使用しないが記録のため
+        fd.append('_next', 'https://oztechjs.github.io/valiark/thanks.html');
+        console.log('[testContactSubmission] POST', url);
+        try {
+          const res = await fetch(url, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } });
+          const text = await res.text();
+          console.log('[testContactSubmission] status:', res.status, 'ok:', res.ok); 
+          console.log('[testContactSubmission] response snippet:', text.slice(0,500));
+          localStorage.setItem('contactFlowLog', JSON.stringify({ t: Date.now(), stage: 'manual-test', status: res.status }));
+          localStorage.setItem('contactFlowDebugResponse', text.slice(0,2000));
+          if (res.status === 422) {
+            console.warn('422: 未検証(verify)またはバリデーションエラーの可能性。送信先アドレスをブラウザで直接開いて認証を完了してください。');
+          }
+        } catch (e) {
+          console.error('[testContactSubmission] error', e);
+        }
+      };
+    </script>
   </body>
 </html>
