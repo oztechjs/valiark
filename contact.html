@@ -60,7 +60,12 @@
     <section class="contact-form-section section bg-light">
       <div class="container">
         <div class="contact-form-container">
-          <form class="contact-form" id="contactForm">
+          <form class="contact-form" id="contactForm" action="https://formsubmit.co/contact@valiark.jp" method="POST">
+            <!-- FormSubmit hidden controls -->
+            <input type="hidden" name="_subject" value="【VALIARKサイト】お問い合わせ" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://oztechjs.github.io/valiark/thanks.html" />
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
             <div class="form-group">
               <label for="inquiryType" class="form-label"
                 >お問い合わせ種別 <span class="required">*</span></label
