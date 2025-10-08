@@ -40,7 +40,7 @@
           <div class="result-label">出展実績</div>
         </div>
         <div class="result-item">
-          <div class="result-number">3ヶ月</div>
+          <div class="result-number">2ヶ月</div>
           <div class="result-label">初リリースまで</div>
         </div>
       </div>
@@ -60,12 +60,32 @@
     <section class="contact-form-section section bg-light">
       <div class="container">
         <div class="contact-form-container">
-          <form class="contact-form" id="contactForm" data-email-src="config/contact_email.html" data-bcc-src="config/contact_bcc_email.html" method="POST">
+          <form
+            class="contact-form"
+            id="contactForm"
+            data-email-src="config/contact_email.html"
+            data-bcc-src="config/contact_bcc_email.html"
+            method="POST"
+          >
             <!-- FormSubmit hidden controls -->
-            <input type="hidden" name="_subject" value="【VALIARKサイト】お問い合わせ" />
+            <input
+              type="hidden"
+              name="_subject"
+              value="【VALIARKサイト】お問い合わせ"
+            />
             <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="https://oztechjs.github.io/valiark/thanks.html" />
-            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+            <input
+              type="hidden"
+              name="_next"
+              value="https://oztechjs.github.io/valiark/thanks.html"
+            />
+            <input
+              type="text"
+              name="_honey"
+              style="display: none"
+              tabindex="-1"
+              autocomplete="off"
+            />
             <div class="form-group">
               <label for="inquiryType" class="form-label"
                 >お問い合わせ種別 <span class="required">*</span></label
@@ -230,8 +250,14 @@
               </label>
             </div>
 
+            <div id="formStatus" class="form-status" aria-live="polite"></div>
             <div class="form-submit">
-              <button type="submit" class="btn btn-primary btn-large">
+              <button
+                type="submit"
+                class="btn btn-primary btn-large"
+                id="contactSubmit"
+                data-label="送信する"
+              >
                 送信する
               </button>
             </div>
@@ -413,32 +439,85 @@
     <script src="js/header.js"></script>
     <script src="js/script.js"></script>
     <script>
-      (function() {
-        const form = document.getElementById('contactForm');
-        if(!form) return;
-        const mainSrc = form.getAttribute('data-email-src');
-        const bccSrc = form.getAttribute('data-bcc-src');
+      (function () {
+        const form = document.getElementById("contactForm");
+        if (!form) return;
+        const mainSrc = form.getAttribute("data-email-src");
+        const bccSrc = form.getAttribute("data-bcc-src");
 
-        const load = (url) => fetch(url, {cache:'no-store'}).then(r=>r.text()).then(t => (t||'').replace(/<!--.*?-->/g,'').trim());
-  const isMail = function(v){ return new RegExp('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$').test(v); };
+        const load = (url) =>
+          fetch(url, { cache: "no-store" })
+            .then((r) => r.text())
+            .then((t) => (t || "").replace(/<!--.*?-->/g, "").trim());
+        const isMail = function (v) {
+          return new RegExp("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$").test(v);
+        };
 
         Promise.all([
-          mainSrc ? load(mainSrc).catch(()=>"") : "",
-          bccSrc ? load(bccSrc).catch(()=>"") : ""
-        ]).then(([toEmail, bccEmail]) => {
-          if(isMail(toEmail)) {
-            form.setAttribute('action', `https://formsubmit.co/${toEmail}`);
-          } else {
-            console.warn('Invalid primary contact email config');
+          mainSrc ? load(mainSrc).catch(() => "") : "",
+          bccSrc ? load(bccSrc).catch(() => "") : "",
+        ])
+          .then(([toEmail, bccEmail]) => {
+            if (isMail(toEmail)) {
+              form.setAttribute("action", `https://formsubmit.co/${toEmail}`);
+            } else {
+              console.warn("Invalid primary contact email config");
+            }
+            if (isMail(bccEmail)) {
+              const hidden = document.createElement("input");
+              hidden.type = "hidden";
+              hidden.name = "_cc"; // FormSubmit uses _cc for additional recipients
+              hidden.value = bccEmail;
+              form.appendChild(hidden);
+            }
+          })
+          .catch((e) => console.warn("Email config load failed:", e));
+      })();
+    </script>
+    <script>
+      (function () {
+        const form = document.getElementById("contactForm");
+        const submitBtn = document.getElementById("contactSubmit");
+        const statusBox = document.getElementById("formStatus");
+        if (!form || !submitBtn) return;
+
+        function setStatus(msg, type) {
+          if (!statusBox) return;
+          statusBox.textContent = msg || "";
+          statusBox.className = "form-status " + (type || "");
+        }
+
+        form.addEventListener("submit", function (e) {
+          if (submitBtn.classList.contains("loading"))
+            return e.preventDefault();
+          // ネイティブ検証
+          if (!form.checkValidity()) {
+            e.preventDefault();
+            setStatus("未入力/形式エラーの項目があります。", "error");
+            form.classList.add("was-validated");
+            // 最初の不正要素へフォーカス
+            const firstInvalid = form.querySelector(":invalid");
+            if (firstInvalid) firstInvalid.focus();
+            return;
           }
-          if(isMail(bccEmail)) {
-            const hidden = document.createElement('input');
-            hidden.type = 'hidden';
-            hidden.name = '_cc'; // FormSubmit uses _cc for additional recipients
-            hidden.value = bccEmail;
-            form.appendChild(hidden);
-          }
-        }).catch(e => console.warn('Email config load failed:', e));
+          // ローディング開始
+          submitBtn.disabled = true;
+          submitBtn.classList.add("loading");
+          submitBtn.innerHTML =
+            '<span class="btn-spinner" aria-hidden="true"></span><span>送信中...</span>';
+          setStatus("送信中...", "info");
+          // 8秒以上経過したら案内（外部遷移が遅い場合）
+          setTimeout(() => {
+            if (
+              document.visibilityState === "visible" &&
+              submitBtn.classList.contains("loading")
+            )
+              setStatus(
+                "送信が遅れています。ネットワークを確認してください。",
+                "warn"
+              );
+          }, 8000);
+        });
       })();
     </script>
   </body>

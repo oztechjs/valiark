@@ -1377,6 +1377,62 @@ body.home .results-strip {
   margin-top: 1rem;
 }
 
+/* Form status & loading */
+.form-status {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  min-height: 1.2em;
+  color: #cccccc;
+}
+.form-status.info {
+  color: #cccccc;
+}
+.form-status.warn {
+  color: #ffcc66;
+}
+.form-status.error {
+  color: #ff6666;
+}
+.form-status.success {
+  color: #66dd88;
+}
+
+#contactSubmit.loading {
+  position: relative;
+  opacity: 0.85;
+  pointer-events: none;
+}
+.btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Simple invalid highlight when .was-validated */
+.was-validated :invalid.form-input,
+.was-validated :invalid.form-select,
+.was-validated :invalid.form-textarea {
+  border-color: #ff4d4d;
+  background: #2a1414;
+}
+.was-validated :invalid.form-input:focus,
+.was-validated :invalid.form-select:focus,
+.was-validated :invalid.form-textarea:focus {
+  outline: 2px solid #ff4d4d;
+}
+
 /* === CONTACT INFO === */
 .contact-info-grid {
   display: grid;
