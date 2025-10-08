@@ -450,20 +450,17 @@
 
         function setStatus(msg, type) {
           if (!statusBox) return;
-          statusBox.textContent = msg || "";
+          statusBox.innerHTML = msg || ""; // allow inline <a> for fallback
           statusBox.className = "form-status " + (type || "");
         }
 
-        // 初期化開始表示
         setStatus("フォーム初期化中...", "info");
 
         const load = (url) =>
           fetch(url, { cache: "no-store" })
             .then((r) => r.text())
             .then((t) => (t || "").replace(/<!--.*?-->/g, "").trim());
-        const isMail = function (v) {
-          return new RegExp("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$").test(v);
-        };
+        const isMail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
         Promise.all([
           mainSrc ? load(mainSrc).catch(() => "") : "",
@@ -473,14 +470,29 @@
             if (isMail(toEmail)) {
               form.setAttribute("action", `https://formsubmit.co/${toEmail}`);
               if (submitBtn) submitBtn.disabled = false;
-              // 送信先メール保持（遅延時フォールバック案内用）
               form.dataset.toEmail = toEmail;
+              try {
+                localStorage.setItem(
+                  "contactFlowLog",
+                  JSON.stringify({
+                    t: Date.now(),
+                    stage: "init-complete",
+                    action: form.getAttribute("action"),
+                  })
+                );
+              } catch (e) {}
               setStatus(
                 "フォーム準備完了。必要事項を入力して送信してください。",
                 "success"
               );
             } else {
               console.warn("Invalid primary contact email config");
+              try {
+                localStorage.setItem(
+                  "contactFlowLog",
+                  JSON.stringify({ t: Date.now(), stage: "init-failed" })
+                );
+              } catch (e) {}
               setStatus(
                 "メール送信設定の読み込みに失敗しました。時間をおいて再読み込みしてください。",
                 "error"
@@ -489,26 +501,37 @@
             if (isMail(bccEmail)) {
               const hidden = document.createElement("input");
               hidden.type = "hidden";
-              hidden.name = "_cc"; // FormSubmit uses _cc for additional recipients
+              hidden.name = "_cc";
               hidden.value = bccEmail;
               form.appendChild(hidden);
             }
           })
           .catch((e) => {
             console.warn("Email config load failed:", e);
+            try {
+              localStorage.setItem(
+                "contactFlowLog",
+                JSON.stringify({ t: Date.now(), stage: "init-error" })
+              );
+            } catch (e2) {}
             setStatus(
               "設定取得でエラーが発生しました。ネットワークをご確認のうえ再読込してください。",
               "error"
             );
           });
 
-        // 5秒以内に action が設定されない場合のフォールバック警告
         setTimeout(() => {
           if (!form.getAttribute("action")) {
             setStatus(
               "まだ送信先が確定していません。通信が遅い可能性があります。再読み込みをお試しください。",
               "warn"
             );
+            try {
+              localStorage.setItem(
+                "contactFlowLog",
+                JSON.stringify({ t: Date.now(), stage: "no-action-timeout" })
+              );
+            } catch (e) {}
           }
         }, 5000);
       })();
@@ -522,58 +545,62 @@
 
         function setStatus(msg, type) {
           if (!statusBox) return;
-          statusBox.textContent = msg || "";
+          statusBox.innerHTML = msg || "";
           statusBox.className = "form-status " + (type || "");
         }
 
-  form.addEventListener("submit", function (e) {
-          if (submitBtn.classList.contains("loading"))
-            return e.preventDefault();
-          // ネイティブ検証
+        form.addEventListener("submit", function (e) {
+          if (submitBtn.classList.contains("loading")) return e.preventDefault();
           if (!form.checkValidity()) {
             e.preventDefault();
             setStatus("未入力/形式エラーの項目があります。", "error");
             form.classList.add("was-validated");
-            // 最初の不正要素へフォーカス
             const firstInvalid = form.querySelector(":invalid");
             if (firstInvalid) firstInvalid.focus();
+            try {
+              localStorage.setItem(
+                "contactFlowLog",
+                JSON.stringify({ t: Date.now(), stage: "validation-failed" })
+              );
+            } catch (e2) {}
             return;
           }
-          // ローディング開始
           submitBtn.disabled = true;
           submitBtn.classList.add("loading");
           submitBtn.innerHTML =
             '<span class="btn-spinner" aria-hidden="true"></span><span>送信中...</span>';
           setStatus("送信中...", "info");
+          try {
+            localStorage.setItem(
+              "contactFlowLog",
+              JSON.stringify({ t: Date.now(), stage: "submit-start" })
+            );
+          } catch (e3) {}
+
           const stage1 = setTimeout(() => {
-            if (
-              document.visibilityState === "visible" &&
-              submitBtn.classList.contains("loading")
-            ) {
-              setStatus(
-                "まだ処理中です…少しお待ちください (回線/サービス応答待ち)",
-                "info"
-              );
+            if (document.visibilityState === "visible" && submitBtn.classList.contains("loading")) {
+              setStatus("まだ処理中です…少しお待ちください (回線/サービス応答待ち)", "info");
+              try { localStorage.setItem("contactFlowLog", JSON.stringify({ t: Date.now(), stage: "delay-stage1" })); } catch (_) {}
             }
           }, 10000);
           const stage2 = setTimeout(() => {
-            if (
-              document.visibilityState === "visible" &&
-              submitBtn.classList.contains("loading")
-            ) {
+            if (document.visibilityState === "visible" && submitBtn.classList.contains("loading")) {
               const mail = form.dataset.toEmail || "contact@valiark.jp";
               setStatus(
                 `送信が完了しないため遅延しています。ネットワークをご確認ください。<br>解消しない場合は <a href="mailto:${mail}?subject=%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B(フォーム遅延)">直接メール</a> もご利用ください。`,
                 "warn"
               );
               if (statusBox) statusBox.style.fontSize = "0.9rem";
+              try { localStorage.setItem("contactFlowLog", JSON.stringify({ t: Date.now(), stage: "delay-stage2" })); } catch (_) {}
             }
           }, 18000);
+
           window.addEventListener(
             "beforeunload",
             () => {
               clearTimeout(stage1);
               clearTimeout(stage2);
+              try { localStorage.setItem("contactFlowLog", JSON.stringify({ t: Date.now(), stage: "navigate-away" })); } catch (_) {}
             },
             { once: true }
           );
