@@ -60,7 +60,7 @@
     <section class="contact-form-section section bg-light">
       <div class="container">
         <div class="contact-form-container">
-          <form class="contact-form" id="contactForm" action="https://formsubmit.co/contact@valiark.jp" method="POST">
+          <form class="contact-form" id="contactForm" data-email-src="config/contact_email.html" method="POST">
             <!-- FormSubmit hidden controls -->
             <input type="hidden" name="_subject" value="【VALIARKサイト】お問い合わせ" />
             <input type="hidden" name="_captcha" value="false" />
@@ -412,5 +412,24 @@
 
     <script src="js/header.js"></script>
     <script src="js/script.js"></script>
+    <script>
+      (function() {
+        const form = document.getElementById('contactForm');
+        if(!form) return;
+        const src = form.getAttribute('data-email-src');
+        if(!src) return;
+        fetch(src, {cache:'no-store'})
+          .then(r => r.text())
+          .then(t => {
+            const email = (t || '').replace(/<!--.*?-->/g,'').trim();
+            if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+              form.setAttribute('action', `https://formsubmit.co/${email}`);
+            } else {
+              console.warn('Invalid contact email config');
+            }
+          })
+          .catch(e => console.warn('Failed to load contact email:', e));
+      })();
+    </script>
   </body>
 </html>
