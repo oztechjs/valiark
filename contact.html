@@ -550,7 +550,8 @@
         }
 
         form.addEventListener("submit", function (e) {
-          if (submitBtn.classList.contains("loading")) return e.preventDefault();
+          if (submitBtn.classList.contains("loading"))
+            return e.preventDefault();
           if (!form.checkValidity()) {
             e.preventDefault();
             setStatus("未入力/形式エラーの項目があります。", "error");
@@ -565,6 +566,7 @@
             } catch (e2) {}
             return;
           }
+          const useAjax = !!window.FORM_AJAX_DEBUG;
           submitBtn.disabled = true;
           submitBtn.classList.add("loading");
           submitBtn.innerHTML =
@@ -577,30 +579,120 @@
             );
           } catch (e3) {}
 
+          if (useAjax && form.action.includes("formsubmit.co/")) {
+            e.preventDefault();
+            const emailPart = form.action.split("formsubmit.co/")[1];
+            const ajaxUrl = `https://formsubmit.co/ajax/${emailPart}`;
+            const fd = new FormData(form);
+            fetch(ajaxUrl, {
+              method: "POST",
+              body: fd,
+              headers: { Accept: "application/json" },
+            })
+              .then(async (res) => {
+                const text = await res.text();
+                const ok = res.ok;
+                try {
+                  localStorage.setItem(
+                    "contactFlowLog",
+                    JSON.stringify({
+                      t: Date.now(),
+                      stage: ok ? "ajax-success" : "ajax-fail",
+                      status: res.status,
+                    })
+                  );
+                  localStorage.setItem(
+                    "contactFlowDebugResponse",
+                    text.slice(0, 2000)
+                  );
+                } catch (_) {}
+                if (ok) {
+                  setStatus("送信完了。リダイレクトします...", "success");
+                  setTimeout(() => {
+                    window.location.href =
+                      form.querySelector('input[name="_next"]').value ||
+                      "thanks.html";
+                  }, 800);
+                } else {
+                  submitBtn.disabled = false;
+                  submitBtn.classList.remove("loading");
+                  submitBtn.innerHTML = submitBtn.dataset.label || "送信する";
+                  setStatus(
+                    `送信失敗 (status ${res.status})。数分後に再試行してください。`,
+                    "error"
+                  );
+                }
+              })
+              .catch((err) => {
+                console.error("AJAX submit error", err);
+                try {
+                  localStorage.setItem(
+                    "contactFlowLog",
+                    JSON.stringify({
+                      t: Date.now(),
+                      stage: "ajax-error",
+                      message: String(err),
+                    })
+                  );
+                } catch (_) {}
+                submitBtn.disabled = false;
+                submitBtn.classList.remove("loading");
+                submitBtn.innerHTML = submitBtn.dataset.label || "送信する";
+                setStatus(
+                  "送信処理でエラーが発生しました。接続状況を確認し再試行してください。",
+                  "error"
+                );
+              });
+            return;
+          }
+
           const stage1 = setTimeout(() => {
-            if (document.visibilityState === "visible" && submitBtn.classList.contains("loading")) {
-              setStatus("まだ処理中です…少しお待ちください (回線/サービス応答待ち)", "info");
-              try { localStorage.setItem("contactFlowLog", JSON.stringify({ t: Date.now(), stage: "delay-stage1" })); } catch (_) {}
+            if (
+              document.visibilityState === "visible" &&
+              submitBtn.classList.contains("loading")
+            ) {
+              setStatus(
+                "まだ処理中です…少しお待ちください (回線/サービス応答待ち)",
+                "info"
+              );
+              try {
+                localStorage.setItem(
+                  "contactFlowLog",
+                  JSON.stringify({ t: Date.now(), stage: "delay-stage1" })
+                );
+              } catch (_) {}
             }
           }, 10000);
           const stage2 = setTimeout(() => {
-            if (document.visibilityState === "visible" && submitBtn.classList.contains("loading")) {
+            if (
+              document.visibilityState === "visible" &&
+              submitBtn.classList.contains("loading")
+            ) {
               const mail = form.dataset.toEmail || "contact@valiark.jp";
               setStatus(
                 `送信が完了しないため遅延しています。ネットワークをご確認ください。<br>解消しない場合は <a href="mailto:${mail}?subject=%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B(フォーム遅延)">直接メール</a> もご利用ください。`,
                 "warn"
               );
               if (statusBox) statusBox.style.fontSize = "0.9rem";
-              try { localStorage.setItem("contactFlowLog", JSON.stringify({ t: Date.now(), stage: "delay-stage2" })); } catch (_) {}
+              try {
+                localStorage.setItem(
+                  "contactFlowLog",
+                  JSON.stringify({ t: Date.now(), stage: "delay-stage2" })
+                );
+              } catch (_) {}
             }
           }, 18000);
-
           window.addEventListener(
             "beforeunload",
             () => {
               clearTimeout(stage1);
               clearTimeout(stage2);
-              try { localStorage.setItem("contactFlowLog", JSON.stringify({ t: Date.now(), stage: "navigate-away" })); } catch (_) {}
+              try {
+                localStorage.setItem(
+                  "contactFlowLog",
+                  JSON.stringify({ t: Date.now(), stage: "navigate-away" })
+                );
+              } catch (_) {}
             },
             { once: true }
           );
