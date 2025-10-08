@@ -15,9 +15,16 @@
       </div>
     </section>
     <section class="section">
-      <div class="container" style="max-width:700px;text-align:center;">
+      <div class="container" style="max-width: 700px; text-align: center">
         <h2 class="section-title">お問い合わせありがとうございます</h2>
-        <p class="section-text">内容を受け付けました。通常 2 営業日以内にご連絡いたします。しばらくお待ちください。</p>
+        <p class="section-text">
+          内容を受け付けました。通常 2
+          営業日以内にご連絡いたします。しばらくお待ちください。
+        </p>
+        <details style="margin:1.5rem 0;text-align:left;font-size:0.85rem;opacity:.8;">
+          <summary>デバッグ情報 (送信経路)</summary>
+          <pre id="debugFlow" style="background:#111;padding:12px;border-radius:6px;white-space:pre-wrap;word-break:break-all;max-height:240px;overflow:auto;color:#eee;"></pre>
+        </details>
         <div class="section-cta">
           <a href="index.html" class="btn btn-primary">トップへ戻る</a>
         </div>
@@ -44,5 +51,23 @@
     </footer>
     <script src="js/header.js"></script>
     <script src="js/script.js"></script>
+    <script>
+      (function(){
+        try {
+          const raw = localStorage.getItem('contactFlowLog');
+          if(raw){
+            const obj = JSON.parse(raw);
+            const ts = new Date(obj.t).toLocaleString();
+            const lines = [
+              `timestamp: ${ts}`,
+              `stage: ${obj.stage}`,
+              obj.action ? `action: ${obj.action}` : ''
+            ].filter(Boolean).join('\n');
+            const el = document.getElementById('debugFlow');
+            if(el) el.textContent = lines;
+          }
+        } catch(e) {}
+      })();
+    </script>
   </body>
 </html>
