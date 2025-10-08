@@ -257,6 +257,7 @@
                 class="btn btn-primary btn-large"
                 id="contactSubmit"
                 data-label="送信する"
+                disabled
               >
                 送信する
               </button>
@@ -444,6 +445,17 @@
         if (!form) return;
         const mainSrc = form.getAttribute("data-email-src");
         const bccSrc = form.getAttribute("data-bcc-src");
+        const submitBtn = document.getElementById("contactSubmit");
+        const statusBox = document.getElementById("formStatus");
+
+        function setStatus(msg, type) {
+          if (!statusBox) return;
+          statusBox.textContent = msg || "";
+          statusBox.className = "form-status " + (type || "");
+        }
+
+        // 初期化開始表示
+        setStatus("フォーム初期化中...", "info");
 
         const load = (url) =>
           fetch(url, { cache: "no-store" })
@@ -460,8 +472,14 @@
           .then(([toEmail, bccEmail]) => {
             if (isMail(toEmail)) {
               form.setAttribute("action", `https://formsubmit.co/${toEmail}`);
+              if (submitBtn) submitBtn.disabled = false;
+              setStatus("フォーム準備完了。必要事項を入力して送信してください。", "success");
             } else {
               console.warn("Invalid primary contact email config");
+              setStatus(
+                "メール送信設定の読み込みに失敗しました。時間をおいて再読み込みしてください。",
+                "error"
+              );
             }
             if (isMail(bccEmail)) {
               const hidden = document.createElement("input");
@@ -471,7 +489,23 @@
               form.appendChild(hidden);
             }
           })
-          .catch((e) => console.warn("Email config load failed:", e));
+          .catch((e) => {
+            console.warn("Email config load failed:", e);
+            setStatus(
+              "設定取得でエラーが発生しました。ネットワークをご確認のうえ再読込してください。",
+              "error"
+            );
+          });
+
+        // 5秒以内に action が設定されない場合のフォールバック警告
+        setTimeout(() => {
+          if (!form.getAttribute("action")) {
+            setStatus(
+              "まだ送信先が確定していません。通信が遅い可能性があります。再読み込みをお試しください。",
+              "warn"
+            );
+          }
+        }, 5000);
       })();
     </script>
     <script>
