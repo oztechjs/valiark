@@ -473,7 +473,12 @@
             if (isMail(toEmail)) {
               form.setAttribute("action", `https://formsubmit.co/${toEmail}`);
               if (submitBtn) submitBtn.disabled = false;
-              setStatus("フォーム準備完了。必要事項を入力して送信してください。", "success");
+              // 送信先メール保持（遅延時フォールバック案内用）
+              form.dataset.toEmail = toEmail;
+              setStatus(
+                "フォーム準備完了。必要事項を入力して送信してください。",
+                "success"
+              );
             } else {
               console.warn("Invalid primary contact email config");
               setStatus(
@@ -521,7 +526,7 @@
           statusBox.className = "form-status " + (type || "");
         }
 
-        form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", function (e) {
           if (submitBtn.classList.contains("loading"))
             return e.preventDefault();
           // ネイティブ検証
@@ -540,17 +545,38 @@
           submitBtn.innerHTML =
             '<span class="btn-spinner" aria-hidden="true"></span><span>送信中...</span>';
           setStatus("送信中...", "info");
-          // 8秒以上経過したら案内（外部遷移が遅い場合）
-          setTimeout(() => {
+          const stage1 = setTimeout(() => {
             if (
               document.visibilityState === "visible" &&
               submitBtn.classList.contains("loading")
-            )
+            ) {
               setStatus(
-                "送信が遅れています。ネットワークを確認してください。",
+                "まだ処理中です…少しお待ちください (回線/サービス応答待ち)",
+                "info"
+              );
+            }
+          }, 10000);
+          const stage2 = setTimeout(() => {
+            if (
+              document.visibilityState === "visible" &&
+              submitBtn.classList.contains("loading")
+            ) {
+              const mail = form.dataset.toEmail || "contact@valiark.jp";
+              setStatus(
+                `送信が完了しないため遅延しています。ネットワークをご確認ください。<br>解消しない場合は <a href="mailto:${mail}?subject=%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B(フォーム遅延)">直接メール</a> もご利用ください。`,
                 "warn"
               );
-          }, 8000);
+              if (statusBox) statusBox.style.fontSize = "0.9rem";
+            }
+          }, 18000);
+          window.addEventListener(
+            "beforeunload",
+            () => {
+              clearTimeout(stage1);
+              clearTimeout(stage2);
+            },
+            { once: true }
+          );
         });
       })();
     </script>
