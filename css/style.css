@@ -26,8 +26,7 @@ body {
   pointer-events: none;
   z-index: 0;
   /* Use provided Japanese-named image; fall back to existing MV image */
-  background-image: url("../images/学生団体VALIARKを立ち上げたんだけどその団体の公式HPのファーストビューの背景にオシャレなエンジニアっぽい雰囲気のかっこいい画像を入れたい.jpg"),
-    url("../images/IMG_2702.JPG");
+  background-image: url("../images/hero-bg.jpg"),
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
