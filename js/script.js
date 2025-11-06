@@ -162,7 +162,7 @@ function initContactForm() {
     }
   }
 
-  function handleFormSubmission(form) {
+  async function handleFormSubmission(form) {
     // Collect form data
     const formData = new FormData(form);
     const data = {};
@@ -178,20 +178,51 @@ function initContactForm() {
 
     // Show loading state
     const submitButton = form.querySelector('button[type="submit"]');
+    const formStatus = document.getElementById('formStatus');
     const originalText = submitButton.textContent;
     submitButton.textContent = "送信中...";
     submitButton.disabled = true;
+    
+    if (formStatus) {
+      formStatus.textContent = "送信中...";
+      formStatus.style.color = "#666";
+    }
 
-    // Simulate form submission (replace with actual submission logic)
-    setTimeout(() => {
-      showSuccessMessage();
-      form.reset();
+    try {
+      // Submit to Formspree
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        showSuccessMessage();
+        form.reset();
+        if (formStatus) {
+          formStatus.textContent = "送信が完了しました！ありがとうございます。";
+          formStatus.style.color = "#4CAF50";
+        }
+        
+        // Reset form visibility
+        handleInquiryTypeChange("business");
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "送信に失敗しました");
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      showErrorMessage("送信に失敗しました。もう一度お試しください。");
+      if (formStatus) {
+        formStatus.textContent = "送信に失敗しました。もう一度お試しください。";
+        formStatus.style.color = "#f44336";
+      }
+    } finally {
       submitButton.textContent = originalText;
       submitButton.disabled = false;
-
-      // Reset form visibility
-      handleInquiryTypeChange("business");
-    }, 2000);
+    }
   }
 
   function validateForm(data) {

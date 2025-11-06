@@ -38,7 +38,7 @@
     <section class="contact-form-section section bg-light">
       <div class="container">
         <div class="contact-form-container">
-          <form class="contact-form" id="contactForm">
+          <form class="contact-form" id="contactForm" action="https://formspree.io/f/mvgveqnq" method="POST">
             <div class="form-group">
               <label for="inquiryType" class="form-label"
                 >お問い合わせ種別 <span class="required">*</span></label
@@ -203,11 +203,15 @@
               </label>
             </div>
 
+            <!-- Honeypot field for spam protection -->
+            <input type="text" name="_gotcha" style="position:absolute;left:-9999px;width:1px;height:1px;" tabindex="-1" autocomplete="off" />
+
             <div class="form-submit">
-              <button type="submit" class="btn btn-primary btn-large">
+              <button type="submit" class="btn btn-primary btn-large" id="submitButton">
                 送信する
               </button>
             </div>
+            <p id="formStatus" style="margin-top: 1rem; text-align: center; font-weight: 500;"></p>
           </form>
         </div>
       </div>
