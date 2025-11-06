@@ -25,8 +25,8 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 0;
-  /* Use hero background image with fallback */
-  background-image: url("../images/hero-bg.jpg"), url("../images/IMG_2702.JPG");
+  /* Use hero background image */
+  background-image: url("../images/hero-bg.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
