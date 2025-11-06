@@ -12,35 +12,29 @@
       rel="stylesheet"
     />
   </head>
-  <body>
-    <!-- Common Header Container -->
-    <div id="header-container"></div>
+  <body class="home">
+    <!-- Header is injected by js/header.js -->
+    <div class="fv-bg" aria-hidden="true"></div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-container">
-        <div class="hero-content">
-          <h1 class="hero-title">
-            次世代の知性が、<br />ビジネスを加速させる。
-          </h1>
-          <p class="hero-subtitle">
-            大阪大学の学生による、AIソリューションチーム「VALIARK」
-          </p>
-          <div class="hero-buttons">
-            <a href="services.html" class="btn btn-primary">事業内容を見る</a>
-            <a href="contact.html" class="btn btn-secondary">お問い合わせ</a>
-          </div>
+    <!-- Results Strip (blended portfolio stats) -->
+    <section class="results-strip">
+      <div class="container results-container">
+        <div class="result-item">
+          <div class="result-number">¥2.5M</div>
+          <div class="result-label">受託規模（PedalShare）</div>
         </div>
-        <div class="hero-logo">
-          <img
-            src="images/IMG_2702.JPG"
-            alt="VALIARK - AIソリューションチーム"
-            class="hero-logo-img"
-          />
+        <div class="result-item">
+          <div class="result-number">★5</div>
+          <div class="result-label">App Store評価（履修伝説）</div>
         </div>
-      </div>
-      <div class="scroll-indicator">
-        <div class="scroll-arrow"></div>
+        <div class="result-item">
+          <div class="result-number">2ヶ月</div>
+          <div class="result-label">初リリースまで</div>
+        </div>
+        <div class="result-item">
+          <div class="result-number">Expo 2025</div>
+          <div class="result-label">musuhi 出展</div>
+        </div>
       </div>
     </section>
 
@@ -49,7 +43,13 @@
       <div class="container">
         <h2 class="section-title">What is VALIARK?</h2>
         <p class="section-text">
-          私たちVALIARKは、大阪大学の学生によって創立されたAI開発団体です。ミッションは「次世代の才能と、未来のテクノロジーを繋ぐ」こと。最先端の知性と、学生ならではの情熱とバイタリティを武器に、企業の課題解決に貢献します。
+          若手エンジニアが主導するAIテクノロジーカンパニー。2025年10月10日設立、大阪大学発。「AIと若さで世の中を楽しく。」を理念に掲げ、AIチャット、教育、モビリティなどの領域で数百万円規模の社会実装型プロジェクトを複数推進。国内外の企業・研究者・教育機関・NPO法人と正式な業務委託・共同開発契約のもとで協業し、設計から開発・運用までを担う新世代のAI開発組織として活動している。
+        </p>
+        <p class="section-text">
+          <em
+            >"AI × Young Engineers" — Building the next generation of social
+            technology from Osaka University.</em
+          >
         </p>
       </div>
     </section>
@@ -62,24 +62,26 @@
             <h3 class="mvv-title">MISSION</h3>
             <p class="mvv-subtitle">私たちの使命</p>
             <p class="mvv-text">
-              次世代の才能と、未来のテクノロジーを繋ぐ。<br />
-              私たちは、挑戦の機会を創造し、AI技術の社会実装を加速させる架け橋となります。
+              AIと若さで世の中を楽しく。<br />
+              私たちは、最先端のAI技術と若手エンジニアの情熱を融合し、社会実装型プロジェクトを通じて新たな価値を創造します。
             </p>
           </div>
           <div class="mvv-item">
             <h3 class="mvv-title">VISION</h3>
             <p class="mvv-subtitle">私たちの目指す未来像</p>
             <p class="mvv-text">
-              すべての学生が、学びながら社会を革新する未来を創る。
+              次世代のAIテクノロジーで、より豊かで楽しい社会の実現を目指す。
             </p>
           </div>
           <div class="mvv-item">
             <h3 class="mvv-title">VALUE</h3>
             <p class="mvv-subtitle">私たちの約束</p>
             <p class="mvv-text">
-              <strong>誠実を貫く - Uphold Integrity</strong><br />
-              学生である前に、一人のプロフェッショナルとして。<br />
-              私たちの全ての活動の基盤は、揺るぎない信頼にあります。
+              <strong
+                >プロフェッショナルな実行力 - Professional Excellence</strong
+              ><br />
+              若手である前に、一人のプロフェッショナルとして。<br />
+              全ての業務委託・共同開発において、確実な成果を追求します。
             </p>
           </div>
         </div>
@@ -296,6 +298,233 @@
       </div>
     </section>
 
+    <!-- Portfolio Section -->
+    <section class="section portfolio-section">
+      <div class="container">
+        <h2 class="section-title">Portfolio</h2>
+        <p class="section-text">
+          VALIARK合同会社の業務委託・共同開発・自社プロダクトの主要実績です。
+        </p>
+
+        <div class="portfolio-grid">
+          <!-- PedalShare -->
+          <article class="portfolio-card">
+            <div class="portfolio-card-header">
+              <div class="portfolio-badges">
+                <span class="badge badge-contract">業務委託</span>
+                <span class="badge">IoT・モビリティ</span>
+              </div>
+              <h3 class="portfolio-title">
+                PedalShare（NPO法人Colors・京都府）
+              </h3>
+              <p class="portfolio-desc">
+                特定非営利活動法人Colorsと業務委託契約を締結し、徳島発のスマートモビリティ実証プロジェクト「PedalShare」の統括開発責任者として参画。自転車ロック機構、GPS連携、クラウド制御を統合したIoT連携型モビリティアプリケーションを開発中。
+              </p>
+            </div>
+            <div class="portfolio-meta">
+              <span>期間: 進行中（〜2026/03）</span>
+              <span class="portfolio-english"
+                >Developing an integrated mobility platform combining IoT, GPS,
+                and app architecture.</span
+              >
+            </div>
+          </article>
+
+          <!-- Sportstech -->
+          <article class="portfolio-card">
+            <div class="portfolio-card-header">
+              <div class="portfolio-badges">
+                <span class="badge badge-contract">業務委託</span>
+                <span class="badge">AI・スポーツテック</span>
+              </div>
+              <h3 class="portfolio-title">Sportstech Japan（東京都港区）</h3>
+              <p class="portfolio-desc">
+                株式会社Sportstech
+                Japanと業務委託契約を締結し、AIフォーム解析・パフォーマンススコアリング技術を応用したAIスポーツSNSプラットフォームの実装を推進中。主にAIモジュール開発を担当し、野球映像を自動評価・AI解析する次世代スポーツテック領域の基盤開発を進行。
+              </p>
+            </div>
+            <div class="portfolio-meta">
+              <span>期間: 2025/09〜 継続</span>
+              <span class="portfolio-english"
+                >Empowering athletes through computer vision and machine
+                learning.</span
+              >
+            </div>
+          </article>
+
+          <!-- 履修伝説 -->
+          <article class="portfolio-card highlight">
+            <div class="portfolio-thumb">
+              <img src="images/IMG_1424.PNG" alt="履修伝説アプリアイコン" />
+            </div>
+            <div class="portfolio-card-header">
+              <div class="portfolio-badges">
+                <span class="badge badge-product">自社</span>
+                <span class="badge">iOS</span>
+              </div>
+              <h3 class="portfolio-title">履修伝説</h3>
+              <p class="portfolio-desc">
+                大学の学び体験を再定義する学習支援アプリ。企画からわずか2ヶ月でApp
+                Storeへリリース。大阪大学の学生を中心に利用され、履修・課題・成績管理を統合した次世代型UIを提供。現在は全国大学対応版の再設計および機能拡張フェーズに移行し、外部教育機関への展開を視野に開発体制を強化。
+              </p>
+            </div>
+            <div class="portfolio-meta">
+              <span class="portfolio-english"
+                >Transforming university learning into a digital
+                experience.</span
+              >
+            </div>
+            <div class="portfolio-actions">
+              <a class="btn btn-secondary" href="works.html">詳細を見る</a>
+              <a
+                class="btn btn-primary"
+                target="_blank"
+                rel="noopener"
+                href="https://apps.apple.com/jp/app/%E5%B1%A5%E4%BF%AE%E4%BC%9D%E8%AA%AC-ver1-0/id6747418309?l=en-US"
+                >App Store</a
+              >
+            </div>
+          </article>
+
+          <!-- musuhi -->
+          <article class="portfolio-card">
+            <div class="portfolio-thumb">
+              <img
+                src="images/S__7749648.jpg"
+                alt="Expo 2025 出展ブースの様子（musuhi）"
+              />
+            </div>
+            <div class="portfolio-card-header">
+              <div class="portfolio-badges">
+                <span class="badge badge-product">自社</span>
+                <span class="badge">Expo 2025</span>
+              </div>
+              <h3 class="portfolio-title">musuhi</h3>
+              <p class="portfolio-desc">大阪万博2025に出展したアプリ。</p>
+            </div>
+            <div class="portfolio-meta">
+              <span>ステータス: 出展済</span>
+            </div>
+          </article>
+
+          <!-- AidiA -->
+          <article class="portfolio-card">
+            <div class="portfolio-card-header">
+              <div class="portfolio-badges">
+                <span class="badge badge-product">自社開発</span>
+                <span class="badge">AIチャット</span>
+              </div>
+              <h3 class="portfolio-title">AidiA（アイディア）</h3>
+              <p class="portfolio-desc">
+                AIと感情の融合を目指すチャットプラットフォーム。感情理解・匿名対話・自然言語処理を統合した感情解析型AIチャットエンジンを開発し、現在はβ版リリースに向けたアルゴリズム精度検証フェーズ。2026年初旬に個人支援アプリとしてローンチ予定。
+              </p>
+            </div>
+            <div class="portfolio-meta">
+              <span>ステータス: β版開発中</span>
+              <span class="portfolio-english"
+                >AidiA — where AI learns empathy.</span
+              >
+            </div>
+          </article>
+
+          <!-- Google共同研究 -->
+          <article class="portfolio-card highlight">
+            <div class="portfolio-card-header">
+              <div class="portfolio-badges">
+                <span class="badge badge-research">共同研究</span>
+                <span class="badge">AI教育</span>
+              </div>
+              <h3 class="portfolio-title">
+                AI教育共同研究プロジェクト（with Google）
+              </h3>
+              <p class="portfolio-desc">
+                Google
+                Gemini開発チームのエンジニアと連携し、AI教育領域における共同研究開発プロジェクトを推進中。AIによる学習最適化アルゴリズムを共同設計し、記憶間隔の最適化や学習履歴データ分析を基盤としたアダプティブラーニングモデルの研究開発を進行。
+              </p>
+            </div>
+            <div class="portfolio-meta">
+              <span>ステータス: 進行中</span>
+              <span class="portfolio-english"
+                >Collaborating with a Google Gemini developer to design adaptive
+                learning AI for next-generation education.</span
+              >
+            </div>
+          </article>
+
+          <!-- WaoTech -->
+          <article class="portfolio-card">
+            <div class="portfolio-card-header">
+              <div class="portfolio-badges">
+                <span class="badge badge-contract">インターン</span>
+                <span class="badge">教育AI</span>
+              </div>
+              <h3 class="portfolio-title">WaoTech（大阪府大阪市）</h3>
+              <p class="portfolio-desc">
+                株式会社ワオテック（年商300億円超の教育グループ・株式会社ワオ・コーポレーションの研究開発子会社）にインターン生として参画。教育×AI領域の複数プロジェクトに従事し、AI教材システム開発や大学入試共通テスト「情報Ⅰ」領域の模試作成・検証にも携わる。
+              </p>
+            </div>
+            <div class="portfolio-meta">
+              <span>期間: 継続中</span>
+              <span class="portfolio-english"
+                >Designing and managing AI-powered learning systems in
+                partnership with WaoTech, Osaka.</span
+              >
+            </div>
+          </article>
+        </div>
+
+        <div class="section-cta">
+          <a href="works.html" class="btn btn-primary">実績をもっと見る</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Plan Navi Section -->
+    <section id="plan-navi" class="section plan-navi-section">
+      <div class="container">
+        <div class="plan-navi-content">
+          <h2 class="section-title">努力を、ひとりぼっちにしない。</h2>
+          <p class="plan-navi-subtitle">
+            AIが導き、似た仲間が支える、学びの新しいかたち。
+          </p>
+          <p class="section-text">
+            <strong>Plan Navi（プラナビ）</strong>
+            は、AIがあなたの生活リズムと目標を理解し、
+            "現実に続けられる勉強計画"を設計する学習ナビゲーションアプリです。
+            同じペースで頑張る仲間と支え合いながら、自分らしい学び方を見つけていく——
+            それは、AIと人間が共に描く新しい学習体験の文化です。
+          </p>
+
+          <ul class="plan-navi-features">
+            <li>
+              <strong>AI設計：</strong>
+              ゴールや生活リズムをもとに、AIが最適な学習計画を自動生成。
+            </li>
+            <li>
+              <strong>同期チーム：</strong>
+              似たペース・目標の3人と匿名で励まし合える仕組み。
+            </li>
+            <li>
+              <strong>フォロー機能：</strong>
+              気の合う仲間をフォローして努力を共有。
+            </li>
+            <li>
+              <strong>AIトレンド：</strong>
+              全国の学習データをAIが要約、社会全体の"努力の空気"を可視化。
+            </li>
+          </ul>
+
+          <blockquote class="plan-navi-quote">
+            「AIが導くのは最短ルートではない。あなたらしいリズムだ。」
+          </blockquote>
+          <p class="plan-navi-footer">
+            Plan Navi は
+            VALIARK合同会社が開発する、新世代のAI学習支援プラットフォームです。
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
@@ -312,7 +541,7 @@
           </nav>
         </div>
         <div class="footer-bottom">
-          <p class="copyright">&copy; 2025 VALIARK. All rights reserved.</p>
+          <p class="copyright">2025 VALIARK</p>
         </div>
       </div>
     </footer>

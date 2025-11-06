@@ -11,6 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
   </head>
   <body>
     <!-- Common Header Container -->
@@ -21,6 +22,28 @@
       <div class="container">
         <h1 class="page-title">私たちについて</h1>
         <p class="page-subtitle">About VALIARK</p>
+      </div>
+    </section>
+
+    <!-- Results Strip (blended portfolio stats) -->
+    <section class="results-strip">
+      <div class="container results-container">
+        <div class="result-item">
+          <div class="result-number">¥2.5M</div>
+          <div class="result-label">受託規模（PedalShare）</div>
+        </div>
+        <div class="result-item">
+          <div class="result-number">★5</div>
+          <div class="result-label">App Store評価（履修伝説）</div>
+        </div>
+        <div class="result-item">
+          <div class="result-number">3ヶ月</div>
+          <div class="result-label">初リリースまで</div>
+        </div>
+        <div class="result-item">
+          <div class="result-number">Expo 2025</div>
+          <div class="result-label">musuhi 出展</div>
+        </div>
       </div>
     </section>
 
@@ -125,6 +148,67 @@
       </div>
     </section>
 
+    <!-- Business Model Section -->
+    <section class="business-model section">
+      <div class="container">
+        <h2 class="section-title">私たちのビジネスモデル</h2>
+        <p class="section-subtitle">
+          企業・VALIARK・学生エンジニアの三者がWin-Win-Winの関係を築く仕組み
+        </p>
+        <div class="business-model-diagram">
+          <div class="mermaid" id="business-model-chart">
+            graph TD Client[企業<br />クライアント<br /><small
+              >低コストでアイデアを具現化</small
+            >] Valiark[VALIARK<br /><small
+              >ビジネスとマネジメント能力の習得</small
+            >] Student[阪大生エンジニア<br /><small
+              >実務を通じて技術力を向上</small
+            >] Client -->|アイデアと開発案件の依頼| Valiark Valiark
+            -->|安価で高品質なソリューション| Client Valiark
+            -->|実践的な開発案件と報酬| Student Student -->|高い技術力と労働力|
+            Valiark classDef valiarkStyle
+            fill:#FF0000,stroke:#333333,stroke-width:3px,color:#FFFFFF,font-weight:bold
+            classDef defaultStyle
+            fill:#FFFFFF,stroke:#333333,stroke-width:2px,color:#333333 class
+            Valiark valiarkStyle class Client,Student defaultStyle
+          </div>
+        </div>
+        <div class="business-model-explanation">
+          <div class="explanation-grid">
+            <div class="explanation-item">
+              <h3 class="explanation-title">企業にとってのメリット</h3>
+              <ul class="explanation-list">
+                <li>従来の開発会社より低コストでソリューションを取得</li>
+                <li>学生の新鮮な視点とアイデアによる革新的な提案</li>
+                <li>大阪大学の高い技術力による品質保証</li>
+                <li>柔軟で迅速な開発プロセス</li>
+              </ul>
+            </div>
+            <div class="explanation-item highlight">
+              <h3 class="explanation-title">VALIARKの役割</h3>
+              <ul class="explanation-list">
+                <li>企業ニーズと学生スキルの最適なマッチング</li>
+                <li>プロジェクト全体のマネジメントと品質管理</li>
+                <li>学生エンジニアの技術サポートと成長支援</li>
+                <li>持続可能なビジネスモデルの構築と運営</li>
+              </ul>
+            </div>
+            <div class="explanation-item">
+              <h3 class="explanation-title">
+                学生エンジニアにとってのメリット
+              </h3>
+              <ul class="explanation-list">
+                <li>実際のビジネス課題に取り組む実践的な経験</li>
+                <li>技術力向上と同時に報酬も獲得</li>
+                <li>多様なプロジェクトを通じたスキルの幅広い習得</li>
+                <li>将来のキャリアに活かせるポートフォリオの構築</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Founders Section -->
     <section class="founders-section section">
       <div class="container">
@@ -140,7 +224,7 @@
               />
             </div>
             <div class="founder-info">
-              <h3 class="founder-name">牧 夢斗（まき ゆめと）</h3>
+              <h3 class="founder-name">牧 夢斗（まき ゆうと）</h3>
               <p class="founder-title">共同代表・技術責任者</p>
               <p class="founder-description">
                 18歳、大分県出身。大阪大学基礎工学部情報科学科1年生。機械学習とデータサイエンスを専攻し、AIソリューション開発に情熱を注ぐ。「技術で社会を変える」をモットーに、VALIARKを共同創設。
@@ -322,12 +406,24 @@
           </nav>
         </div>
         <div class="footer-bottom">
-          <p class="copyright">&copy; 2025 VALIARK. All rights reserved.</p>
+          <p class="copyright">2025 VALIARK</p>
         </div>
       </div>
     </footer>
 
     <script src="js/header.js"></script>
     <script src="js/script.js"></script>
+    <script>
+      // Mermaid.js の初期化
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "neutral",
+        flowchart: {
+          useMaxWidth: true,
+          htmlLabels: true,
+          curve: "cardinal",
+        },
+      });
+    </script>
   </body>
 </html>

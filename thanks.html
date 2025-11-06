@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>送信完了 - VALIARK</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="header-container"></div>
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-title">送信完了</h1>
+        <p class="page-subtitle">Thank You</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container" style="max-width: 700px; text-align: center">
+        <h2 class="section-title">お問い合わせありがとうございます</h2>
+        <p class="section-text">
+          内容を受け付けました。通常 2
+          営業日以内にご連絡いたします。しばらくお待ちください。
+        </p>
+        <details
+          style="
+            margin: 1.5rem 0;
+            text-align: left;
+            font-size: 0.85rem;
+            opacity: 0.8;
+          "
+        >
+          <summary>デバッグ情報 (送信経路)</summary>
+          <pre
+            id="debugFlow"
+            style="
+              background: #111;
+              padding: 12px;
+              border-radius: 6px;
+              white-space: pre-wrap;
+              word-break: break-all;
+              max-height: 240px;
+              overflow: auto;
+              color: #eee;
+            "
+          ></pre>
+        </details>
+        <div class="section-cta">
+          <a href="index.html" class="btn btn-primary">トップへ戻る</a>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <img src="images/logo.png" alt="VALIARK" class="logo" />
+          </div>
+          <nav class="footer-nav">
+            <a href="index.html" class="footer-link">ホーム</a>
+            <a href="about.html" class="footer-link">私たちについて</a>
+            <a href="services.html" class="footer-link">事業内容</a>
+            <a href="works.html" class="footer-link">実績紹介</a>
+            <a href="contact.html" class="footer-link">お問い合わせ</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <p class="copyright">2025 VALIARK</p>
+        </div>
+      </div>
+    </footer>
+    <script src="js/header.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      (function () {
+        try {
+          const raw = localStorage.getItem("contactFlowLog");
+          if (raw) {
+            const obj = JSON.parse(raw);
+            const ts = new Date(obj.t).toLocaleString();
+            const lines = [
+              `timestamp: ${ts}`,
+              `stage: ${obj.stage}`,
+              obj.action ? `action: ${obj.action}` : "",
+            ]
+              .filter(Boolean)
+              .join("\n");
+            const el = document.getElementById("debugFlow");
+            if (el) el.textContent = lines;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>
