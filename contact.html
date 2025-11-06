@@ -20,7 +20,13 @@
     <section class="page-header">
       <div class="container">
         <h1 class="page-title">お問い合わせ</h1>
-        <p class="page-subtitle">Contact</p>
+        <p class="page-subtitle">Contact — 共創パートナー募集</p>
+        <div class="page-philosophy">
+          <p><em>「才能を、導け。努力を、孤独にしない。」</em></p>
+          <p>
+            私たちは、才能を導くプロジェクトの共創パートナーを求めています。
+          </p>
+        </div>
       </div>
     </section>
 
@@ -49,10 +55,19 @@
     <!-- Contact Introduction -->
     <section class="contact-intro section">
       <div class="container">
-        <h2 class="section-title">お気軽にご相談ください</h2>
+        <h2 class="section-title">Plan Naviの理念に共感する皆さまへ</h2>
         <p class="section-text large">
-          AI導入やDX化に関するご相談、具体的なプロジェクトのご依頼、VALIARKへの参加希望など、どんなことでもお気軽にお問い合わせください。専門スタッフが丁寧にお答えいたします。
+          「やる気があるのに、やり方がわからない」──この課題をAIで解決するPlan
+          Naviの開発を通じて、私たちは「才能を、見逃さない社会をつくる。」という理念を掲げました。AI
+          Learning・AI Mobility・AI Sports・AI Education
+          Consultingの各領域で、AIによって機会損失をなくす社会の実現に向けて、共創パートナーシップを築いていきませんか。
         </p>
+        <div class="contact-mission">
+          <p class="contact-mission-text">
+            <strong>「努力の方向を導く」</strong
+            >技術で、教育・モビリティ・スポーツ・すべての領域において、人が才能を発揮できる社会基盤の構築を目指しています。
+          </p>
+        </div>
       </div>
     </section>
 
@@ -60,7 +75,12 @@
     <section class="contact-form-section section bg-light">
       <div class="container">
         <div class="contact-form-container">
-          <form class="contact-form" id="contactForm" action="https://formspree.io/f/mvgveqnq" method="POST">
+          <form
+            class="contact-form"
+            id="contactForm"
+            action="https://formspree.io/f/mvgveqnq"
+            method="POST"
+          >
             <div class="form-group">
               <label for="inquiryType" class="form-label"
                 >お問い合わせ種別 <span class="required">*</span></label
@@ -70,21 +90,41 @@
                   <input
                     type="radio"
                     name="inquiryType"
-                    value="business"
+                    value="plan-navi-collaboration"
                     required
                   />
                   <span class="radio-custom"></span>
-                  ご依頼・ご相談（企業の方）
+                  Plan Navi協業・導入相談
                 </label>
                 <label class="radio-label">
                   <input
                     type="radio"
                     name="inquiryType"
-                    value="recruitment"
+                    value="education-partnership"
                     required
                   />
                   <span class="radio-custom"></span>
-                  参加希望（阪大生の方）
+                  教育機関・自治体連携
+                </label>
+                <label class="radio-label">
+                  <input
+                    type="radio"
+                    name="inquiryType"
+                    value="recruitment-internship"
+                    required
+                  />
+                  <span class="radio-custom"></span>
+                  採用・インターンシップ
+                </label>
+                <label class="radio-label">
+                  <input
+                    type="radio"
+                    name="inquiryType"
+                    value="investment-media"
+                    required
+                  />
+                  <span class="radio-custom"></span>
+                  投資・取材依頼
                 </label>
                 <label class="radio-label">
                   <input
@@ -226,14 +266,27 @@
             </div>
 
             <!-- Honeypot field for spam protection -->
-            <input type="text" name="_gotcha" style="position:absolute;left:-9999px;width:1px;height:1px;" tabindex="-1" autocomplete="off" />
+            <input
+              type="text"
+              name="_gotcha"
+              style="position: absolute; left: -9999px; width: 1px; height: 1px"
+              tabindex="-1"
+              autocomplete="off"
+            />
 
             <div class="form-submit">
-              <button type="submit" class="btn btn-primary btn-large" id="submitButton">
+              <button
+                type="submit"
+                class="btn btn-primary btn-large"
+                id="submitButton"
+              >
                 送信する
               </button>
             </div>
-            <p id="formStatus" style="margin-top: 1rem; text-align: center; font-weight: 500;"></p>
+            <p
+              id="formStatus"
+              style="margin-top: 1rem; text-align: center; font-weight: 500"
+            ></p>
           </form>
         </div>
       </div>
